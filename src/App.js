@@ -15,7 +15,9 @@ function App() {
   useEffect(() => {
     let searchArray = inpValue.split(' ')
     for ( let i in searchArray ) {
-      setFiltered(data.questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())))
+      if ( searchArray[i].length > 0 ) {
+        setFiltered(data.questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())))
+      }
     }
   }, [inpValue]);
 
