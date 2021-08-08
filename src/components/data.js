@@ -1,4 +1,4 @@
-const questions = {
+const data = {
     "groups":{
        "left":[
           {
@@ -214,4 +214,4 @@ const questions = {
     ]
  }
 
- export default questions;
+ export default data;

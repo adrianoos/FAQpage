@@ -1,8 +1,7 @@
-import questions from './components/data'
+import data from './components/data'
 import './App.css'
 
 function App() {
-
   return (
     <div className="App">
       <h1>FAQ Page</h1>
@@ -11,7 +10,7 @@ function App() {
         <button>search</button>
       </form>
      <div className='QuestionsDisplay'></div>
-     <p>Place for data display</p>
+      <p>{data.questions.map( item => <p>{item.title}</p>)}</p>
     </div>
   );
 }
