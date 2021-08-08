@@ -1,27 +1,33 @@
 import data from './components/data'
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
 
-  const [ query, setQuery ] = useState('')
-  const [ inpValue, setInpValue ] = useState('')
-
-  console.log(inpValue)
+  const [ inpValue, setInpValue ] = useState(' ')
+  const [ filtered , setFiltered ] = useState(data.questions)
 
   const updateInputValue = (e) => {
+    e.preventDefault()
     setInpValue(e.target.value)
-  }
+  };
+
+  useEffect(() => {
+    let searchArray = inpValue.split(' ')
+    for ( let i in searchArray ) {
+      setFiltered(data.questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())))
+    }
+  }, [inpValue]);
 
   return (
     <div className="App">
       <h1>FAQ Page</h1>
       <form>
-        <input className='MainInput' onChange={updateInputValue}></input>
+        <input className='MainInput' onChange={(e) => updateInputValue(e)}></input>
         <button>search</button>
       </form>
      <div className='QuestionsDisplay'></div>
-      <p>{data.questions.map( item => <p>{item.title}</p>)}</p>
+      <p>{filtered.map( item => <p key={item.title}>{item.title}</p>)}</p>
     </div>
   );
 }
