@@ -6,6 +6,7 @@ function App() {
 
   const [ inpValue, setInpValue ] = useState(' ')
   const [ filtered , setFiltered ] = useState(data.questions)
+  const [ showAnswer , setShowAnswer ] = useState('')
 
   const updateInputValue = (e) => {
     e.preventDefault()
@@ -21,6 +22,12 @@ function App() {
     }
   }, [inpValue]);
 
+  const changeDisplay = (id) => {
+  if (id !== showAnswer) {
+    setShowAnswer(id)
+  } else { setShowAnswer('') }
+  };
+
   return (
     <div className="App">
       <h1>FAQ Page</h1>
@@ -28,8 +35,13 @@ function App() {
         <input className='MainInput' onChange={(e) => updateInputValue(e)}></input>
         <button>search</button>
       </form>
-     <div className='QuestionsDisplay'></div>
-      <p>{filtered.map( item => <p key={item.title}>{item.title}</p>)}</p>
+     <div className='QuestionsDisplay'>
+     {filtered.map( item =>
+       <div>
+            <h1 className='questionParagraph' onClick={() => changeDisplay(item.id)} id={item.id} key={item.title}>{item.title}</h1>
+            {showAnswer == item.id ? <p>{item.content}</p> : ''}
+      </div>)}
+     </div>
     </div>
   );
 }
