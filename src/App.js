@@ -5,8 +5,9 @@ import { useState, useEffect } from 'react'
 function App() {
 
   const savedShowAnswer = JSON.parse(localStorage.getItem('showAnswer'))
+  const { groups, questions } = data
   const [ inpValue, setInpValue ] = useState(' ')
-  const [ filtered , setFiltered ] = useState(data.questions)
+  const [ filtered , setFiltered ] = useState(questions)
   const [ showAnswer, setShowAnswer ] = useState(savedShowAnswer || '')
   const [ groupDisplay, setGroupDisplay ] = useState('All')
 
@@ -19,7 +20,7 @@ function App() {
     let searchArray = inpValue.split(' ')
     for ( let i in searchArray ) {
       if ( searchArray[i].length > 0 ) {
-        setFiltered(data.questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())))
+        setFiltered(questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())))
       }
     }
   }, [inpValue]);
@@ -36,10 +37,10 @@ function App() {
 
   const switchGroupDisplay = (id) => {
     if (id == 'All') {
-      setFiltered(data.questions)
+      setFiltered(questions)
       setGroupDisplay('All')
     }
-    else { setFiltered(data.questions.filter(item => item.groupId == id))
+    else { setFiltered(questions.filter(item => item.groupId == id))
            setGroupDisplay(id)
     }
   };
@@ -53,7 +54,7 @@ function App() {
       </form>
          <div id='questionGroups'>
          <button className={groupDisplay == 'All' ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
-           { Object.values(data.groups).flat().map( item =>
+           { Object.values(groups).flat().map( item =>
             <button className={groupDisplay == item.id ? 'groupsButtonFilled' : 'groupsButton'} key={item.id} onClick={() => switchGroupDisplay(item.id)}>{item.name}</button>
             )}
          </div>
