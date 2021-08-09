@@ -39,7 +39,7 @@ function App() {
      {filtered.map( item =>
        <div>
             <h1 className='questionParagraph' onClick={() => changeDisplay(item.id)} id={item.id} key={item.title}>{item.title}</h1>
-            {showAnswer == item.id ? <p>{item.content}</p> : ''}
+            {showAnswer == item.id ? <div dangerouslySetInnerHTML={{__html: item.content}}></div> : ''}
       </div>)}
      </div>
     </div>
