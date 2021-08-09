@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react'
 
 function App() {
 
+  const savedShowAnswer = JSON.parse(localStorage.getItem('showAnswer'))
   const [ inpValue, setInpValue ] = useState(' ')
   const [ filtered , setFiltered ] = useState(data.questions)
-  const [ showAnswer, setShowAnswer ] = useState('')
+  const [ showAnswer, setShowAnswer ] = useState(savedShowAnswer || '')
   const [ groupDisplay, setGroupDisplay ] = useState('All')
 
   const updateInputValue = (e) => {
@@ -26,7 +27,11 @@ function App() {
   const changeDisplay = (id) => {
   if (id !== showAnswer) {
     setShowAnswer(id)
-  } else { setShowAnswer('') }
+    window.localStorage.setItem('showAnswer', JSON.stringify(id))
+  } else {
+    setShowAnswer('')
+    window.localStorage.setItem('showAnswer', JSON.stringify(''))
+   }
   };
 
   const switchGroupDisplay = (id) => {
@@ -67,3 +72,6 @@ function App() {
 }
 
 export default App;
+
+
+// zapisz w LS stan showAnswer
