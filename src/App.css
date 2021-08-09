@@ -15,3 +15,16 @@ body {
 .questionParagraph:hover {
 	cursor: pointer;
 }
+
+#questionGroups {
+	margin: 10px;
+}
+
+.groupsButton {
+	margin: 0 5px;
+}
+
+.groupsButtonFilled {
+	margin: 0 5px;
+	background-color: aqua;
+}
