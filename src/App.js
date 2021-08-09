@@ -42,7 +42,6 @@ function App() {
     else { setFiltered(data.questions.filter(item => item.groupId == id))
            setGroupDisplay(id)
     }
-
   };
 
   return (
@@ -53,12 +52,10 @@ function App() {
         <button>search</button>
       </form>
          <div id='questionGroups'>
-           <button className={groupDisplay == 'All' ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
-           <button className={groupDisplay == 2 ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay(data.groups.left[0].id)}>{data.groups.left[0].name}</button>
-           <button className={groupDisplay == 5 ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay(data.groups.left[1].id)}>{data.groups.left[1].name}</button>
-           <button className={groupDisplay == 1 ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay(data.groups.right[0].id)}>{data.groups.right[0].name}</button>
-           <button className={groupDisplay == 4 ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay(data.groups.right[1].id)} >{data.groups.right[1].name}</button>
-           <button className={groupDisplay == 3 ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay(data.groups.right[2].id)}>{data.groups.right[2].name}</button>
+         <button className={groupDisplay == 'All' ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
+           { Object.values(data.groups).flat().map( item =>
+            <button className={groupDisplay == item.id ? 'groupsButtonFilled' : 'groupsButton'} key={item.id} onClick={() => switchGroupDisplay(item.id)}>{item.name}</button>
+            )}
          </div>
      <div className='QuestionsDisplay'>
      {filtered.map( item =>
@@ -72,6 +69,3 @@ function App() {
 }
 
 export default App;
-
-
-// zapisz w LS stan showAnswer
