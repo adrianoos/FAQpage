@@ -1,6 +1,7 @@
 import data from './components/data'
-import './App.css'
-import { useState, useEffect } from 'react'
+import './App.scss'
+import { useState, useEffect } from 'react';
+import Animate from 'react-smooth';
 
 function App() {
 
@@ -12,8 +13,8 @@ function App() {
   const [ groupDisplay, setGroupDisplay ] = useState('All')
 
   const updateInputValue = (e) => {
-    e.preventDefault()
-    setInpValue(e.target.value)
+     e.preventDefault()
+     setInpValue(e.target.value)
   };
 
   useEffect(() => {
@@ -26,7 +27,7 @@ function App() {
   }, [inpValue]);
 
   const changeDisplay = (id) => {
-  if (id !== showAnswer) {
+    if (id !== showAnswer) {
     setShowAnswer(id)
     window.localStorage.setItem('showAnswer', JSON.stringify(id))
   } else {
@@ -47,22 +48,25 @@ function App() {
 
   return (
     <div className="App">
-      <h1>FAQ Page</h1>
-      <form>
-        <input className='MainInput' onChange={(e) => updateInputValue(e)}></input>
-        <button>search</button>
-      </form>
-         <div id='questionGroups'>
-         <button className={groupDisplay == 'All' ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
-           { Object.values(groups).flat().map( item =>
+      <h1 id='Header'>FAQ Section</h1>
+        <form>
+          <input className='MainInput' placeholder={'Search'} onChange={(e) => updateInputValue(e)}></input>
+        </form>
+          <div id='questionGroups'>
+            <button className={groupDisplay == 'All' ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
+             { Object.values(groups).flat().map( item =>
             <button className={groupDisplay == item.id ? 'groupsButtonFilled' : 'groupsButton'} key={item.id} onClick={() => switchGroupDisplay(item.id)}>{item.name}</button>
             )}
          </div>
-     <div className='QuestionsDisplay'>
-     {filtered.map( item =>
-       <div key={item.id}>
-            <h1 className='questionParagraph' onClick={() => changeDisplay(item.id)} id={item.id} key={item.title}>{item.title}</h1>
-            {showAnswer == item.id ? <div key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></div> : ''}
+         <div className='QuestionsDisplay'>
+         {filtered.map( item =>
+           <div key={item.id}>
+             <h1 className='questionParagraph' onClick={() => changeDisplay(item.id)} id={item.id} key={item.title}>{item.title}</h1>
+             {showAnswer == item.id ?
+               <Animate to="1" from="0" attributeName="opacity">
+                  <div key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></div>
+               </Animate>
+             : ''}
       </div>)}
      </div>
     </div>

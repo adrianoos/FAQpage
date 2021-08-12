@@ -1,0 +1,83 @@
+// colors
+
+$background: #7ac083;
+$primaryFontColor: #4d3838;
+$primaryButtonColor: #a7ffb3;
+$secondaryButtonColor: #6fd37c;
+
+// fonts
+
+$primaryFont: "Oswald", sans-serif;
+
+// shadows
+
+$primaryButtonShadow: 5px 10px 12px #4e4e4e59;
+$secondaryButtonShadow: 5px 10px 8px #4e4e4ea1;
+$headersShadow: 5px 10px 12px #4e4e4e59;
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#Header {
+	font-size: 50px;
+	text-shadow: $headersShadow;
+}
+
+.App {
+	width: 100vw;
+	height: auto;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	font-family: $primaryFont;
+	color: $primaryFontColor;
+	background-color: $background;
+}
+
+.MainInput {
+	min-height: 20px;
+	min-width: 300px;
+	margin: 0 2px;
+	border: 2px solid $primaryFontColor;
+	border-radius: 5px;
+	box-shadow: $primaryButtonShadow;
+}
+
+.questionParagraph:hover {
+	cursor: pointer;
+}
+
+#questionGroups {
+	margin: 10px;
+}
+
+.questionParagraph {
+	text-shadow: $headersShadow;
+}
+
+.groupsButton {
+	height: 35px;
+	min-width: 80px;
+	margin: 0 5px;
+	font-family: $primaryFont;
+	font-size: large;
+	background-color: $primaryButtonColor;
+	border-radius: 5px;
+	box-shadow: $primaryButtonShadow;
+}
+
+.groupsButtonFilled {
+	height: 40px;
+	min-width: 80px;
+	margin: 0 5px;
+	font-family: $primaryFont;
+	font-size: large;
+	font-weight: 900;
+	border-radius: 5px;
+	background-color: $secondaryButtonColor;
+	box-shadow: $secondaryButtonShadow;
+}
