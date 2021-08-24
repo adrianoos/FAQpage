@@ -13,7 +13,6 @@ function App() {
   const [ groupDisplay, setGroupDisplay ] = useState('All')
 
   const updateInputValue = (e) => {
-     e.preventDefault()
      setInpValue(e.target.value)
   };
 
@@ -49,8 +48,8 @@ function App() {
   return (
     <div className="App">
       <h1 id='Header'>FAQ Section</h1>
-        <form>
-          <input className='MainInput' placeholder={'Search'} onChange={(e) => updateInputValue(e)}></input>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input className='MainInput' placeholder={'Search'} onChange={updateInputValue}></input>
         </form>
           <div id='questionGroups'>
             <button className={groupDisplay == 'All' ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
