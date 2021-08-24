@@ -64,7 +64,7 @@ function App() {
              <h1 className='questionParagraph' onClick={() => changeDisplay(item.id)} id={item.id} key={item.title}>{item.title}</h1>
              {showAnswer == item.id ?
                <Animate to="1" from="0" attributeName="opacity">
-                  <div key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></div>
+                  <div id="AnswerDisplay" key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></div>
                </Animate>
              : ''}
       </div>)}
