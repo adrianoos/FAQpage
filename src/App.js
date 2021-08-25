@@ -1,4 +1,4 @@
-import data from './components/data'
+import data from './data/data'
 import './App.scss'
 import { useState, useEffect } from 'react';
 import Animate from 'react-smooth';
@@ -25,7 +25,7 @@ useEffect(() => {
       ))
     }
   }
-}, [inpValue]);
+}, [inpValue, questions]);
 
 
   const changeDisplay = (id) => {
@@ -39,7 +39,7 @@ useEffect(() => {
   };
 
   const switchGroupDisplay = (id) => {
-    if (id == 'All') {
+    if (id === 'All') {
       setFiltered(questions)
       setGroupDisplay('All')
     }
@@ -55,18 +55,18 @@ useEffect(() => {
           <input className='MainInput' placeholder={'Search'} onChange={updateInputValue}></input>
         </form>
           <div id='questionGroups'>
-            <button className={groupDisplay == 'All' ? 'groupsButtonFilled' : 'groupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
+            <button className={groupDisplay == 'All' ? 'GroupsButtonFilled' : 'GroupsButton'} onClick={() => switchGroupDisplay('All')}>All</button>
              { Object.values(groups).flat().map( item =>
-            <button className={groupDisplay == item.id ? 'groupsButtonFilled' : 'groupsButton'} key={item.id} onClick={() => switchGroupDisplay(item.id)}>{item.name}</button>
+            <button className={groupDisplay == item.id ? 'GroupsButtonFilled' : 'GroupsButton'} key={item.id} onClick={() => switchGroupDisplay(item.id)}>{item.name}</button>
             )}
          </div>
          <div className='QuestionsDisplay'>
          {filtered.map( item =>
            <div key={item.id}>
-             <h1 className='questionParagraph' onClick={() => changeDisplay(item.id)} id={item.id} key={item.title}>{item.title}</h1>
+             <h1 className='QuestionParagraph' onClick={() => changeDisplay(item.id)} id={item.id} key={item.title}>{item.title}</h1>
              {showAnswer == item.id ?
                <Animate to="1" from="0" attributeName="opacity">
-                  <div id="AnswerDisplay" key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></div>
+                  <div className="AnswerDisplay" key={item.id} dangerouslySetInnerHTML={{__html: item.content}}></div>
                </Animate>
              : ''}
       </div>)}
