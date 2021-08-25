@@ -7,7 +7,7 @@ function App() {
 
   const savedShowAnswer = JSON.parse(localStorage.getItem('showAnswer'))
   const { groups, questions } = data
-  const [ inpValue, setInpValue ] = useState(' ')
+  const [ inpValue, setInpValue ] = useState('')
   const [ filtered , setFiltered ] = useState(questions)
   const [ showAnswer, setShowAnswer ] = useState(savedShowAnswer || '')
   const [ groupDisplay, setGroupDisplay ] = useState('All')
@@ -16,14 +16,17 @@ function App() {
      setInpValue(e.target.value)
   };
 
-  useEffect(() => {
-    let searchArray = inpValue.split(' ')
-    for ( let i in searchArray ) {
-      if ( searchArray[i].length > 0 ) {
-        setFiltered(questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())))
-      }
+useEffect(() => {
+  if (inpValue) {
+    const searchArray = inpValue.split(' ')
+    for (let i in searchArray) {
+      setFiltered(questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())
+      && item.title.toLowerCase().includes(searchArray[i - 1] ? searchArray[i - 1].toLowerCase() : '')
+      ))
     }
-  }, [inpValue]);
+  }
+}, [inpValue]);
+
 
   const changeDisplay = (id) => {
     if (id !== showAnswer) {
