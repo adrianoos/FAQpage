@@ -20,9 +20,11 @@ useEffect(() => {
   if (inpValue) {
     const searchArray = inpValue.split(' ')
     for (let i in searchArray) {
-      setFiltered(questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())
-      && item.title.toLowerCase().includes(searchArray[i - 1] ? searchArray[i - 1].toLowerCase() : '')
-      ))
+      if (searchArray[i].length > 1) {
+        setFiltered(questions.filter(item => item.title.toLowerCase().includes(searchArray[i].toLowerCase())
+        && item.title.toLowerCase().includes(searchArray[i - 1] ? searchArray[i - 1].toLowerCase() : '')
+        ))
+      }
     }
   }
 }, [inpValue, questions]);
